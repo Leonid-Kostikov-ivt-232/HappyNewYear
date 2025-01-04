@@ -1,0 +1,95 @@
+// C Новым 2025 Годом!
+
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <dos.h>
+#include "grasptc1.h"
+#include "bmp.h"
+
+void sound_dos()
+{
+   int i;
+   for(i = 0; i <= 4; i++)
+   {
+       sound(440);
+       delay(20); // Задержка (проигрывание)звука
+       nosound(); // Остановка звука
+   }
+}
+
+int main()
+{
+    int dY, XC, i, j, k, year_len;
+
+    /* Для нормального отображения
+    числа года размер массива year
+    указал с запасом. */
+
+    char year[10];
+    initgr();
+    settextjustify(CENTER_TEXT, CENTER_TEXT);
+    XC = (X__max)/2; dY = (Y__max/8)+400;
+
+    printf("\n\nВведите число года: ");
+    fgets(year, sizeof(year), stdin);
+    year[strcspn(year, "\n")] = 0;
+    year_len = strlen(year);
+
+    printf("%d", year_len);
+    getch();
+
+    while(year_len < 4 || year_len > 4)
+    {
+	printf("\n\nЧисло года должно состоять из четырех цифр!");
+	printf("\n\nВведите число года: ");
+	fgets(year, sizeof(year), stdin);
+    }
+    
+    /* При нажатии любой клавиши будет 
+    слышен звук 440 Гц */
+    sound_dos();
+
+    setbkcolor(1); // цвет фона
+
+    for(i = dY; i > 150; i--)
+    {
+	settextstyle(DEFAULT_FONT, HORIZ_DIR, 4);
+	outtextxy(XC, i, "С Новым");
+	delay(15);
+	cleardevice();
+    }
+
+    for(j = dY; j > 200; j--)
+    {
+	outtextxy(XC, i, "С Новым");
+	settextstyle(DEFAULT_FONT, HORIZ_DIR, 4);
+	outtextxy(XC, j, year);
+	delay(15);
+	cleardevice();
+    }
+
+    for(k = dY; k > 250; k--)
+    {
+	outtextxy(XC, i, "С Новым");
+	outtextxy(XC, j, year);
+	settextstyle(DEFAULT_FONT, HORIZ_DIR, 4);
+	outtextxy(XC, k, "Годом!");
+	delay(15);
+	cleardevice();
+    }
+
+    outtextxy(XC, i, "С Новым");
+    outtextxy(XC, j, year);
+    outtextxy(XC, k, "Годом!");
+
+    endgr();
+
+    sound_dos();
+
+    bmp(); // Вывод на экран картинки "*.bmp"
+
+    sound_dos();
+
+    return 0;
+}
