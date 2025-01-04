@@ -1,2 +1,2 @@
 # HappyNewYear
-Поздравление с Новым Годом родных, друзей и одногруппников на windows 9x. Программа написана на языке C в IDE Turbo C/C++.
+Happy New Year greetings to family, friends and classmates on windows 9x. The program is written in C in the Turbo C/C++ IDE.
